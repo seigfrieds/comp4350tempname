@@ -1,0 +1,13 @@
+# For development
+services:
+  webapp-311:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env.development

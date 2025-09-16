@@ -1,0 +1,8 @@
+# For production
+services:
+  webapp-311-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    ports:
+      - "80:80"
