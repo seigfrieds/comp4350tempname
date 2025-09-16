@@ -1,0 +1,13 @@
+# For development
+services:
+  ourcity.webapp.dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env.development

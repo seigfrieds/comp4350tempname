@@ -1,0 +1,14 @@
+﻿services:
+  ourcity.api.dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./OurCity.Api:/app
+    env_file:
+      - .env.development
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+      - ASPNETCORE_ENVIRONMENT=Development

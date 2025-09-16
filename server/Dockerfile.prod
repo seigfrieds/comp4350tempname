@@ -1,0 +1,39 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+
+WORKDIR /app
+
+COPY *.sln .
+COPY OurCity.Api/*.csproj ./OurCity.Api/
+COPY OurCity.Api.Test/*.csproj ./OurCity.Api.Test/
+RUN dotnet restore
+
+COPY . .
+
+WORKDIR /app/OurCity.Api
+
+RUN dotnet build -c Release --no-restore
+
+# Test stage
+FROM build AS test
+
+WORKDIR /app/OurCity.Api.Test
+
+RUN dotnet test -c Release --no-build
+
+# Publish stage
+FROM build AS publish
+
+WORKDIR /app/OurCity.Api
+
+RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
+
+# Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+
+WORKDIR /app
+
+COPY --from=publish /app/publish .
+
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "OurCity.Api.dll", "--urls", "http://0.0.0.0:8080"]
