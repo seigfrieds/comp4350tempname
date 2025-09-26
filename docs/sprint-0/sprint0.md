@@ -87,9 +87,9 @@ For our non-functional feature, we want to be able to handle 125 users with 1250
 ### Nice-To-Have Features
 
 - Polls and Surveys
-  - City officials will be able to run polls and surveys themselves to gather feedback and increase community involvement.
+  - City officials will be able to run polls and surveys to gather feedback and increase community involvement.
 - Social Features
-  - Users can follow other accounts and form groups/communities to author posts together (e.g. neighborhood of Transcona makes a post together)
+  - Users can follow each other and form groups/communities to author posts together (e.g. neighborhood of Transcona makes a post together)
 - Accessibility
   - Grammar checkers, French translations, voice readers, and more will be added to the site.
 
