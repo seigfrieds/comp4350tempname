@@ -59,16 +59,7 @@ OurCity remedies this by providing an official hub for the citizens. It will all
 | As an administrator, I want to be able to ban belligerent citizens so that I can keep the community safe. | Given I am an administrator viewing a belligerent citizen’s profile, when I click on the “Ban” button, then that user’s account is banned. |
 | As an administrator, I want to be able to create admin accounts so that I can add city officials to the application. | Given I am on the “Administrator Management” page, when I click on the “New” button, complete required fields, and click on the “Create” button, then a new admin account is created. |
 
-### Core Non-Functional Feature: Handle Heavier Loads
-
-For our non-functional feature, we want to be able to handle 125 users with 1250 concurrent requests per minute. 
-- One way we plan to boost our backend’s performance is by caching frequently accessed data for quicker response times.
-
-### Nice-To-Have Features
-
-For our nice-to-have features, we also created user stories during our sprint planning, if they are of interest.
-
-#### Map Overview
+### Core Feature: Map Overview
 
 | User Story | Acceptance Criteria |
 | - | - |
@@ -77,7 +68,7 @@ For our nice-to-have features, we also created user stories during our sprint pl
 | As a user, I want to be able to view the marked locations for filtered results so that I can filter posts on the map that are most relevant to me. | Given a set of filtered results, when I open the map overview, then the markers for filtered posts are displayed on the map. |
 | As a user, I want to be able to view a heatmap of the posts so that I can see the most popular locations for suggestions in general.  | Given posts with locations added, when I open the heatmap, then a map overview with coloured sections showing frequency of posts in an area is displayed. |
 
-#### Notification System
+### Core Feature: Notification System
 
 | User Story | Acceptance Criteria |
 | - | - |
@@ -87,6 +78,20 @@ For our nice-to-have features, we also created user stories during our sprint pl
 | As a user, I want to be notified when posts that I have saved have been updated so that I can stay up to date with posts that I am interested in. | Given I have a post saved, when my saved post is updated, then  a notification is sent to me. |
 | As a user, I want to clear notifications so that I can only see the ones I have not addressed. | Given I have received notifications, when I select a notification to clear, then all read notifications are removed. |
 | As a user, I want to configure my notification settings so that I can only receive notifications for desired updates. | Given I am in the notifications settings page, when I toggle off notifications for a specific type of update, then notifications will not be sent for that specific type of update. |
+
+### Core Non-Functional Feature: Handle Heavier Loads
+
+For our non-functional feature, we want to be able to handle 125 users with 1250 concurrent requests per minute. 
+- One way we plan to boost our backend’s performance is by caching frequently accessed data for quicker response times.
+
+### Nice-To-Have Features
+
+- Polls and Surveys
+  - City officials will be able to run polls and surveys themselves to gather feedback and increase community involvement even more.
+- Social Features
+  - Users can follow other accounts and form groups/communities to author posts together (e.g. neighborhood of Transcona makes a post together)
+- Accessibility
+  - Grammar checkers, French translations, voice readers, and more will be added to the site.
 
 ## Initial Architecture
 
