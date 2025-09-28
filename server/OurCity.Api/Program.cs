@@ -3,15 +3,12 @@ using OurCity.Api.Middlewares;
 using Scalar.AspNetCore;
 using Serilog;
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .CreateLogger();
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<ExampleSettings>(builder.Configuration.GetSection("ExampleSettings"));
 
-builder.Services.AddSerilog();
+builder.Host.UseSerilog((ctx, config) => config
+    .ReadFrom.Configuration(builder.Configuration));
 
 builder.Services.AddAuthentication("Cookie")
     .AddCookie("Cookie");
@@ -29,6 +26,7 @@ else
     app.UseGlobalExceptionHandler();
 }
 
+app.UseCorrelationId();
 app.UseSecurityHeaders();
 
 if (app.Environment.IsDevelopment())
