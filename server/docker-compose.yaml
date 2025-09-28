@@ -12,3 +12,24 @@
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=true
       - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - ourcity.postgres.dev
+      - ourcity.redis.dev
+  ourcity.postgres.dev:
+    image: postgres:16.10
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ourcity
+    ports:
+      - "6666:5432"
+    volumes:
+      - dev_postgres_data:/var/lib/postgresql/data
+  ourcity.redis.dev:
+    image: redis:7.4.5
+    ports:
+      - "6379:6379"
+
+volumes:
+  dev_postgres_data:
