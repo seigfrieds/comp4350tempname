@@ -5,12 +5,10 @@ namespace OurCity.Api.Middlewares;
 public class CorrelationIdMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<CorrelationIdMiddleware> _logger;
 
-    public CorrelationIdMiddleware(RequestDelegate next, ILogger<CorrelationIdMiddleware> logger)
+    public CorrelationIdMiddleware(RequestDelegate next)
     {
         _next = next;
-        _logger = logger;
     }
 
     public async Task InvokeAsync(HttpContext context)
