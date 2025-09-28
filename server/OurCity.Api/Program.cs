@@ -29,6 +29,8 @@ else
     app.UseGlobalExceptionHandler();
 }
 
+app.UseSecurityHeaders();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
