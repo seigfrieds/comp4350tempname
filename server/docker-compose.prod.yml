@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     ports:
-      - "8080:8080"
+      - "9000:9000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
@@ -18,13 +18,13 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: ourcity
     ports:
-      - "6666:5432"
+      - "9100:5432"
     volumes:
       - prod_postgres_data:/var/lib/postgresql/data
   ourcity.redis.prod:
     image: redis:7.4.5
     ports:
-      - "6379:6379"
+      - "9200:6379"
 
 volumes:
   prod_postgres_data:

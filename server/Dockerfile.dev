@@ -5,5 +5,5 @@ WORKDIR /app
 COPY OurCity.Api/*.csproj .
 RUN dotnet restore
 
-EXPOSE 8080
-CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:8080"]
+EXPOSE 8000
+CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:8000"]

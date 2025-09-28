@@ -35,5 +35,5 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
-EXPOSE 8080
-ENTRYPOINT ["dotnet", "OurCity.Api.dll", "--urls", "http://0.0.0.0:8080"]
+EXPOSE 9000
+ENTRYPOINT ["dotnet", "OurCity.Api.dll", "--urls", "http://0.0.0.0:9000"]

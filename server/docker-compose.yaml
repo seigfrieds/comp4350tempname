@@ -4,7 +4,7 @@
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "8080:8080"
+      - "8000:8000"
     volumes:
       - ./OurCity.Api:/app
     env_file:
@@ -23,13 +23,13 @@
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: ourcity
     ports:
-      - "6666:5432"
+      - "8100:5432"
     volumes:
       - dev_postgres_data:/var/lib/postgresql/data
   ourcity.redis.dev:
     image: redis:7.4.5
     ports:
-      - "6379:6379"
+      - "8200:6379"
 
 volumes:
   dev_postgres_data:
