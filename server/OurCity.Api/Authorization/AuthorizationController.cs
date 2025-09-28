@@ -18,14 +18,14 @@ public class AuthorizationController : ControllerBase
     
     [HttpGet]
     [Route("userInfo")]
-    public Ok<List<string>> UserInformation()
+    public IActionResult UserInformation()
     {
-        return TypedResults.Ok(HttpContext.User.Claims.Select(claim => claim.Value).ToList());
+        return Ok(HttpContext.User.Claims.Select(claim => claim.Value).ToList());
     }
     
     [HttpGet]
     [Route("login")]
-    public async Task<Ok> Login()
+    public async Task<IActionResult> Login()
     {
         var claims = new List<Claim>();
         claims.Add(new Claim("username", new Random().Next(10).ToString()));
@@ -34,6 +34,6 @@ public class AuthorizationController : ControllerBase
 
         await HttpContext.SignInAsync("Cookie", user);
         
-        return TypedResults.Ok();
+        return Ok();
     }
 }

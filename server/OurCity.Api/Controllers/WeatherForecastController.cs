@@ -20,16 +20,16 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet]
-    public Results<NotFound, Ok<List<WeatherForecast>>> Get()
+    public IActionResult Get()
     {
         _logger.LogInformation("I am processing a WeatherForecast request right now!");
 
         if (Random.Shared.Next(2) == 0)
         {
-            return TypedResults.NotFound();
+            return NotFound();
         }
 
-        return TypedResults.Ok(
+        return Ok(
             Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
