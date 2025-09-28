@@ -1,5 +1,7 @@
 using OurCity.Api.Configurations;
 using OurCity.Api.Middlewares;
+using OurCity.Api.Repositories;
+using OurCity.Api.Services;
 using Scalar.AspNetCore;
 using Serilog;
 
@@ -14,6 +16,11 @@ builder.Services.AddAuthentication("Cookie")
     .AddCookie("Cookie");
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+var connectionString = builder.Configuration.GetConnectionString("Postgres");
+builder.Services.AddScoped<IPostRepository>(sp => new PostRepository(connectionString));
+
+builder.Services.AddScoped<IPostService, PostService>();
 
 var app = builder.Build();
 
