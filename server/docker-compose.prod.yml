@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - "9000:9000"
+    env_file:
+      - .env.production
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
