@@ -28,8 +28,13 @@
       - dev_postgres_data:/var/lib/postgresql/data
   ourcity.redis.dev:
     image: redis:7.4.5
+    restart: always
     ports:
       - "8200:6379"
+    volumes:
+      - dev_redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
 
 volumes:
   dev_postgres_data:
+  dev_redis_data:

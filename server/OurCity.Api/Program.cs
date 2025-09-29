@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.DataProtection;
 using OurCity.Api.Configurations;
 using OurCity.Api.Middlewares;
 using OurCity.Api.Repositories;
 using OurCity.Api.Services;
 using Scalar.AspNetCore;
 using Serilog;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +14,18 @@ builder.Services.Configure<ExampleSettings>(builder.Configuration.GetSection("Ex
 builder.Host.UseSerilog((ctx, config) => config
     .ReadFrom.Configuration(builder.Configuration));
 
+var redisMultiplexer = ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"));
+builder.Services.AddSingleton<IConnectionMultiplexer>(redisMultiplexer);
+builder.Services.AddDataProtection()
+    .PersistKeysToStackExchangeRedis(redisMultiplexer, "DataProtectionKeys");
+
 builder.Services.AddAuthentication("Cookie")
     .AddCookie("Cookie");
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-var connectionString = builder.Configuration.GetConnectionString("Postgres");
-builder.Services.AddScoped<IPostRepository>(sp => new PostRepository(connectionString));
+var postgresConnectionString = builder.Configuration.GetConnectionString("Postgres");
+builder.Services.AddScoped<IPostRepository>(sp => new PostRepository(postgresConnectionString));
 
 builder.Services.AddScoped<IPostService, PostService>();
 
