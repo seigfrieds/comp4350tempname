@@ -14,6 +14,10 @@ WORKDIR /app/OurCity.Api
 
 RUN dotnet build -c Release --no-restore
 
+WORKDIR /app/OurCity.Api.Test
+
+RUN dotnet build -c Release --no-restore
+
 # Test stage
 FROM build AS test
 
