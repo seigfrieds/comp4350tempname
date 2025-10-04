@@ -24,6 +24,15 @@ builder.Services.AddAuthentication("Cookie")
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = (context) =>
+    {
+        context.ProblemDetails.Extensions.Remove("traceId");
+    };
+});
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 var postgresConnectionString = builder.Configuration.GetConnectionString("Postgres");
 builder.Services.AddScoped<IPostRepository>(sp => new PostRepository(postgresConnectionString));
 
@@ -37,7 +46,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseGlobalExceptionHandler();
+    app.UseExceptionHandler();
 }
 
 app.UseCorrelationId();
